@@ -119,20 +119,20 @@ export default function Header() {
                     <Link 
                         to="/" 
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
+                        className="block px-4 py-3 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
                         
                         Home
                     </Link>
                     <Link 
                         to="/profiles" 
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
+                        className="block px-4 py-3 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
                         Profiles
                     </Link>
                     <Link    
                         to="/watchlist" 
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
+                        className="block px-4 py-3 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
                         Watchlist
                     </Link>
                     {isLoggedIn ? (
@@ -141,7 +141,7 @@ export default function Header() {
                             <Link 
                                 to={`/profile/${userAuthenticated?.username}`}
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="block px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors flex items-center">
+                                className="block px-4 py-3 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors flex items-center">
                                 <img    
                                 src={userAuthenticated?.image}
                                 alt="profile picture"
@@ -152,7 +152,7 @@ export default function Header() {
                         </div>
                         <button 
                             onClick={handleLogout}
-                            className="px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors w-full text-left">
+                            className="px-4 py-3 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors w-full text-left">
                             Logout
                         </button>
                         </>
@@ -160,7 +160,7 @@ export default function Header() {
                         <Link 
                             to="/login" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
+                            className="block px-4 py-3 rounded-md text-sm font-medium hover:bg-indigo-800/40 transition-colors">
                             Login
                         </Link>
                     )}      
