@@ -13,7 +13,7 @@ export default function Watchlist() {
     useEffect(() => {
         const fetchWatchlist = async () => {
             try {
-                const response = await fetch('https://localhost:3000/api/watchlist', {
+                const response = await fetch('http://localhost:3000/api/watchlist', {
                     credentials: 'include'
                 })
                 const data = await response.json()

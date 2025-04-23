@@ -26,7 +26,7 @@ export default function Movie() {
     useEffect(() => {
         const fetchMovie = async () => {
             try{
-                const response = await fetch(`https://localhost:3000/api/movies/${slug}`)
+                const response = await fetch(`http://localhost:3000/api/movies/${slug}`)
                 if (!response.ok) {
                     throw new Error('Movie not found')
                 }
@@ -43,7 +43,7 @@ export default function Movie() {
     // Fetch comments
     const fetchComments = async () => {
         try {
-            const response = await fetch(`https://localhost:3000/api/comments/${slug}`, {
+            const response = await fetch(`http://localhost:3000/api/comments/${slug}`, {
                 credentials: 'include'
             })
             if (!response.ok) {
@@ -72,7 +72,7 @@ export default function Movie() {
     async function handleSubmit(e){
         e.preventDefault()
         try{
-            const response = await fetch(`https://localhost:3000/api/comments/${slug}`, {
+            const response = await fetch(`http://localhost:3000/api/comments/${slug}`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

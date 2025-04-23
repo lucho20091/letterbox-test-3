@@ -8,7 +8,7 @@ export default function ProfileSearch({ fetchWatchlist, username }) {
     const handleSearch = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`https://localhost:3000/api/search/${search}`, {
+            const response = await fetch(`http://localhost:3000/api/search/${search}`, {
                 credentials: 'include'
             })
             const data = await response.json();
@@ -20,7 +20,7 @@ export default function ProfileSearch({ fetchWatchlist, username }) {
 
     const addToWatchList = async (movie) => {
         try{
-            const response = await fetch(`https://localhost:3000/api/watchlist`, {
+            const response = await fetch(`http://localhost:3000/api/watchlist`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
