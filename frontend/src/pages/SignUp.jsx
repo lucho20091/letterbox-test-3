@@ -30,6 +30,9 @@ function SignUp() {
       if (response.status === 400) {
         throw new Error('Username already exists');
       }
+      if (response.status === 429) {
+        throw new Error('Too many requests, please try again after 2 days');
+      }
       return response.json();
     })
     .then(() => {

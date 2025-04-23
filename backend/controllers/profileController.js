@@ -40,7 +40,6 @@ const get_all_profiles = async (req, res) => {
 
 const search_movie = async (req, res) => {
     const movieName = req.params.title;
-    console.log(`http://www.omdbapi.com/?apikey=${process.env.API_KEY}&s=${movieName}`)
     try {
         const response = await fetch(`http://www.omdbapi.com/?apikey=${process.env.API_KEY}&s=${movieName}`);
         const data = await response.json();
@@ -53,7 +52,6 @@ const search_movie = async (req, res) => {
 const add_to_watchlist = async (req, res) => {
     try {
         const { username, imdbID, image, title } = req.body;
-        console.log(req.body)
         const existingMovie = await MovieWatchList.findOne({ username, imdbID });
         if (existingMovie) {
             return res.status(400).json({ message: 'Movie already in watchlist' });
@@ -78,6 +76,26 @@ const get_watchlist = async (req, res) => {
 const delete_from_watchlist = async (req, res) => { 
     try {
         const { imdbID } = req.params;
+        const userId = req.user.userId;
+
+        // Get the user's information to get their username
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Find the watchlist entry first
+        const watchlistEntry = await MovieWatchList.findOne({ imdbID });
+        
+        if (!watchlistEntry) {
+            return res.status(404).json({ message: 'Movie not found in watchlist' });
+        }
+
+        // Check if the authenticated user owns this watchlist entry
+        if (watchlistEntry.username !== user.username) {
+            return res.status(403).json({ message: 'You can only delete movies from your own watchlist' });
+        }
+
         await MovieWatchList.deleteOne({ imdbID });
         res.status(200).json({ message: 'Movie removed from watchlist' });
     } catch (error) {

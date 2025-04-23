@@ -3,6 +3,7 @@ const jwt_secret = process.env.JWT_SECRET;
 
 const authMiddleware = (req, res, next) => {
     try {
+        console.log('req.cookies', req.cookies);
         const token = req.cookies.token;
         if (!token) {
             return res.status(401).json({ message: "No token provided" });
@@ -10,6 +11,7 @@ const authMiddleware = (req, res, next) => {
 
         const decoded = jwt.verify(token, jwt_secret);
         req.user = decoded;
+        console.log('req.user', req.user);
         next();
     } catch (error) {
         if (error.name === 'JsonWebTokenError') {

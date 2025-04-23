@@ -30,6 +30,9 @@ function Login() {
       if (response.status === 400) {
         throw new Error('Username or password are incorrect');
       }
+      if (response.status === 429) {
+        throw new Error('Too many login attempts, please try again after 15 minutes');
+      }
       return response.json();
     })
     .then(() => {

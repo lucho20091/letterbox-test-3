@@ -7,7 +7,6 @@ const jwtSecret = process.env.JWT_SECRET;
 const get_Movies = async (req, res) => {
     try {
         const movies = await Movie.find().sort({rating: -1});
-        // console.log(movies)
         res.status(200).json(movies);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
@@ -39,7 +38,6 @@ const post_Login = async (req, res) => {
     const { username, password } = req.body;
     try{
         const user = await User.findOne({ username });
-        console.log(user)
         if (!user) {
             return res.status(400).json({ message: 'Username or password are incorrect' });
         }
@@ -59,7 +57,6 @@ const post_Register = async (req, res) => {
     const { username, password } = req.body;
     try {
         const existingUser = await User.findOne({ username });
-        console.log(existingUser)
         if (existingUser) { 
             return res.status(400).json({ message: 'Username already exists' });
         }
