@@ -5,3 +5,4 @@ export const SIGNUP = '/signup';
 export const PROFILE = '/profile/:username';
 export const PROFILES = '/profiles';
 export const WATCHLIST = '/watchlist';
+export const ADMIN = '/admin';

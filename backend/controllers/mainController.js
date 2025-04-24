@@ -4,6 +4,8 @@ const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
+const { scrapeFilms } = require('../services/filmScrapper.js');
+
 const get_Movies = async (req, res) => {
     try {
         const movies = await Movie.find().sort({rating: -1});
@@ -26,10 +28,14 @@ const get_Movie = async (req, res) => {
 const get_User = async (req, res) => {
     const { userId } = req.user;
     const user = await User.findById(userId);
-    const userData = {
+    console.log(user.role)
+    let userData = {
         username: user.username,
         image: user.image,
         id: user._id    
+    }
+    if (user.role === 'admin') {
+        userData.role = 'admin'
     }
     res.status(200).json(userData);
 }
@@ -114,6 +120,25 @@ const post_Logout = async (req, res) => {
     }
 }
 
+const get_RefreshMovies = async (req, res) => {
+    try {
+        // First delete all existing movies
+        await Movie.deleteMany({});
+        const response = await scrapeFilms();
+        console.log(response.length)
+        if (!response || response.length === 0) {
+            throw new Error('No movies were scraped');
+        }
+        await Movie.insertMany(response);
+        // Return the updated movies list
+        const updatedMovies = await Movie.find().sort({rating: -1});
+        res.status(200).json(updatedMovies);
+    } catch (error) {
+        console.error('Error refreshing movies:', error);
+        res.status(500).json({ message: error.message || 'Internal server error' });
+    }
+}
+
 module.exports = {
-    get_Movies, get_Movie, post_Comment, post_Login, get_User, post_Register, get_Comments, delete_Comment, post_Logout
+    get_Movies, get_Movie, post_Comment, post_Login, get_User, post_Register, get_Comments, delete_Comment, post_Logout, get_RefreshMovies
 }

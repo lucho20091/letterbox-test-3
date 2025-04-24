@@ -17,7 +17,7 @@ export default function MovieComments({ comments, fetchComments }) {
     
     const handleDelete = async (commentId) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+            const response = await fetch(`/api/comments/${commentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

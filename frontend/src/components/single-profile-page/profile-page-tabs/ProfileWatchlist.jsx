@@ -11,7 +11,7 @@ export default function ProfileWatchlist({ watchlist, fetchWatchlist, userAuthen
         }
 
         try{
-            const response = await fetch(`http://localhost:3000/api/watchlist/${imdbID}`, {
+            const response = await fetch(`/api/watchlist/${imdbID}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })

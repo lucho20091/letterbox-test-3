@@ -9,6 +9,8 @@ import Movie from './pages/Movie'
 import Profiles from './pages/Profiles'
 import Profile from './pages/Profile'
 import Watchlist from './pages/Watchlist'
+import Admin from './pages/Admin'
+import NotFound from './pages/NotFound'
 function App() {
   return (
     <div className="flex flex-col h-dvh">
@@ -21,6 +23,8 @@ function App() {
         <Route path={ROUTES.PROFILES} element={<Profiles />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
         <Route path={ROUTES.WATCHLIST} element={<Watchlist />} />
+        <Route path={ROUTES.ADMIN} element={<Admin />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )

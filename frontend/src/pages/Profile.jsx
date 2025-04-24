@@ -16,7 +16,7 @@ export default function Profile(){
         const fetchProfile = async () => {  
             try{
                 setLoading(true)
-                const response = await fetch(`http://localhost:3000/api/profile/${username}`, {
+                const response = await fetch(`/api/profile/${username}`, {
                     credentials: 'include'
                 })
                 if (!response.ok) {
@@ -37,7 +37,7 @@ export default function Profile(){
 
     async function fetchWatchlist(){
         try{
-            const response = await fetch(`http://localhost:3000/api/watchlist/${username}`, {
+            const response = await fetch(`/api/watchlist/${username}`, {
                 credentials: 'include'
             })
             if (!response.ok) {

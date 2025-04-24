@@ -18,7 +18,7 @@ function SignUp() {
     setLoading(true);
     setError('');
     
-    fetch('http://localhost:3000/api/register', {
+    fetch('/api/register', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {

@@ -18,7 +18,7 @@ function Login() {
     setLoading(true);
     setError('');
     
-    fetch('http://localhost:3000/api/login', {
+    fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {

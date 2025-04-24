@@ -6,6 +6,7 @@ const { signupLimiter, loginLimiter } = require('../middleware/rateLimitMiddlewa
 
 router.get('/api/user', authMiddleware, mainController.get_User);
 router.get('/api/movies', mainController.get_Movies);
+router.get('/api/movies/refresh', authMiddleware, mainController.get_RefreshMovies);
 router.get('/api/movies/:slug', mainController.get_Movie);
 router.post('/api/login', loginLimiter, mainController.post_Login);
 router.post('/api/register', signupLimiter, mainController.post_Register);
